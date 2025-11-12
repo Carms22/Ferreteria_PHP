@@ -1,3 +1,1 @@
-<?php
-    echo "landing";
-?>
+<h2>Landing--> suministros</h2>
