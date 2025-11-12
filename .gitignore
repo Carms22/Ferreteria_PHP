@@ -1,0 +1,31 @@
+# Dependencias de Composer
+/vendor/
+
+# Archivos de configuración sensibles
+.env
+.env.local
+.env.*.local
+
+# Configuración de IDEs y editores
+/.idea/
+/.vscode/
+/nbproject/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Logs y cachés
+*.log
+/cache/
+/tmp/
+/storage/
+
+# Archivos de PHPUnit
+.phpunit.result.cache
+
+# Configuración de PHPStorm y similares
+*.iml
+
+# Archivos de despliegue locales
+/.htaccess
