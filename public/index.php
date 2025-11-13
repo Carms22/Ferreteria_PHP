@@ -1,16 +1,21 @@
 <?php
 session_start();
+
 include_once __DIR__ . "/../views/header.php";
 include_once __DIR__ . "/../src/Core/Database.php";
-use Core\Database;
-$conexion = Database::connect();
+require_once __DIR__ . "/../src/Core/Auth.php";
 
-if ($conexion) {
-    echo "Conexión exitosa";
-} else {
-    echo "Error al conectar";
-}
+use Core\Database;
+use Core\Auth;
+
+// Conexión y Auth
+$conexion = Database::connect();
+$auth = new Auth($conexion);
+
+// Mensaje de conexión (quitarlo en producción)
+echo $conexion ? "<p style='color:green;'>Conexión exitosa</p>" : "<p style='color:red;'>Error al conectar</p>";
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -32,6 +37,17 @@ if ($conexion) {
              * "/../views/" → sube un nivel (..) y entra en views/
              * Resultado final → /var/www/html/T1_Practica2_Ferreteria/views/auth/logout.php
              */
+            
+            // Páginas públicas
+            $publicPages = ['auth/login', 'auth/register'];
+
+            
+            // Si la página no es pública y el usuario no está autenticado → redirigir al login
+            if (!in_array($page, $publicPages) && 
+                !$auth->isAuthenticated()) {
+                header("Location: index.php?page=auth/login");
+                exit;
+            }
 
             if (file_exists($file)) {
                 include $file;

@@ -33,6 +33,12 @@ class Auth{
         }
         return false;
     }
+    /**
+     * Verificar si el usuario está autenticado
+     */
+    public function isAuthenticated(): bool {
+        return isset($_SESSION['user_id']);
+    }
 
     /**
      * Cierra la sesión del usuario
