@@ -1,3 +1,4 @@
+
 T1_Practica2_Ferreteria/
 ├─ public/
 │ ├─ index.php 

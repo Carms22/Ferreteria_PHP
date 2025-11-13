@@ -6,15 +6,20 @@ require_once __DIR__ . "/../../src/Core/Auth.php";
 use Core\Database;
 use Core\Auth;
 
-$pdo = (new Database())->getConnection();
+
+// Obtén la conexión directamente
+$pdo = Database::connect();
+
+// Crea el objeto Auth con la conexión
 $auth = new Auth($pdo);
+
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST['email'] ?? '';
     $pass  = $_POST['pass'] ?? '';
 
     if ($auth->login($email, $pass)) {
-        header("Location: ../../public/index.php");
+        header("Location: ../../public/index.php?page=catalog/landing");
         exit;
     } else {
         $error = "Credenciales incorrectas";

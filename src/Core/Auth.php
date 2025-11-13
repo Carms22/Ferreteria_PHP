@@ -1,14 +1,12 @@
 <?php
 namespace Core;
-
 use PDO;
 
 /**
  * Clase Auth
  * Maneja la autenticación de usuarios
  */
-class Auth
-{
+class Auth{
     private PDO $pdo;
 
     public function __construct(PDO $pdo) {

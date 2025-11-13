@@ -1,6 +1,15 @@
 <?php
 session_start();
 include_once __DIR__ . "/../views/header.php";
+include_once __DIR__ . "/../src/Core/Database.php";
+use Core\Database;
+$conexion = Database::connect();
+
+if ($conexion) {
+    echo "Conexión exitosa";
+} else {
+    echo "Error al conectar";
+}
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +25,7 @@ include_once __DIR__ . "/../views/header.php";
         <?php
         if (isset($_GET['page'])) {
             // construimos ruta segura
-            $page = $_GET['page'];
+            $page = basename($_GET['page']); // Seguridad: evita rutas maliciosas
             $file = __DIR__ . "/../views/" . $page . ".php";
             /**
              * __DIR__ → /var/www/html/T1_Practica2_Ferreteria/public
