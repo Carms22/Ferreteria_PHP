@@ -11,9 +11,6 @@ use Core\Auth;
 // Conexión y Auth
 $conexion = Database::connect();
 $auth = new Auth($conexion);
-
-// Mensaje de conexión (quitarlo en producción)
-echo $conexion ? "<p style='color:green;'>Conexión exitosa</p>" : "<p style='color:red;'>Error al conectar</p>";
 ?>
 
 
@@ -31,7 +28,7 @@ echo $conexion ? "<p style='color:green;'>Conexión exitosa</p>" : "<p style='co
         if (isset($_GET['page'])) {
             // construimos ruta segura
             $page = basename($_GET['page']); // Seguridad: evita rutas maliciosas
-            $file = __DIR__ . "/../views/" . $page . ".php";
+            $file = __DIR__ . "/../views/". $page .".php";
             /**
              * __DIR__ → /var/www/html/T1_Practica2_Ferreteria/public
              * "/../views/" → sube un nivel (..) y entra en views/
@@ -39,14 +36,13 @@ echo $conexion ? "<p style='color:green;'>Conexión exitosa</p>" : "<p style='co
              */
             
             // Páginas públicas
-            $publicPages = ['auth/login', 'auth/register'];
-
+            $publicPages = ['auth/login', 'auth/logout'];
             
             // Si la página no es pública y el usuario no está autenticado → redirigir al login
             if (!in_array($page, $publicPages) && 
                 !$auth->isAuthenticated()) {
-                header("Location: index.php?page=auth/login");
-                exit;
+                $page="auth/login";
+                $file= __DIR__ . "/../views/". $page .".php";
             }
 
             if (file_exists($file)) {
@@ -55,9 +51,17 @@ echo $conexion ? "<p style='color:green;'>Conexión exitosa</p>" : "<p style='co
                 echo "<h2>Página no encontrada</h2>";
             }
         } else {
-
-            
-            echo "<h1>Bienvenido a la Ferretería</h1>";
+            // Si no hay página en la URL y el usuario no está autenticado → login
+            if (!$auth->isAuthenticated()) {
+                $page = "auth/login";
+                $file = __DIR__ . "/../views/". $page .".php";
+                include $file;
+            } else {
+                // Si ya está autenticado y no hay parámetro → mostrar landing por defecto
+                $page = "catalog/landing";
+                $file = __DIR__ . "/../views/". $page .".php";
+                include $file;
+            }
         }
         ?>
     </div>

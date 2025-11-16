@@ -13,7 +13,7 @@ class Database {
     private static function cargarArchivoEnv(): void {
         static $loaded = false;
         if (!$loaded) {
-            $dotenv = Dotenv::createImmutable(__DIR__);
+            $dotenv = Dotenv::createImmutable(__DIR__.'/../../');
             $dotenv->load();
             $loaded = true;
         }
