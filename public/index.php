@@ -3,8 +3,6 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
-
-include_once __DIR__ . "/../views/header.php";
 include_once __DIR__ . "/../src/Core/Database.php";
 require_once __DIR__ . "/../src/Core/Auth.php";
 
@@ -14,6 +12,11 @@ use Core\Auth;
 // Conexión y Auth
 $conexion = Database::connect();
 $auth = new Auth($conexion);
+
+
+
+// Incluye el header solo si no es logout
+include_once __DIR__ . "/../views/header.php";
 ?>
 
 
@@ -37,16 +40,6 @@ $auth = new Auth($conexion);
              * "/../views/" → sube un nivel (..) y entra en views/
              * Resultado final → /var/www/html/T1_Practica2_Ferreteria/views/auth/logout.php
              */
-            
-            // Páginas públicas
-            $publicPages = ['auth/login', 'auth/logout'];
-            
-            // Si la página no es pública y el usuario no está autenticado → redirigir al login
-            if (!in_array($page, $publicPages) && 
-                !$auth->isAuthenticated()) {
-                $page="auth/login";
-                $file= __DIR__ . "/../views/". $page .".php";
-            }
 
             if (file_exists($file)) {
                 include $file;
