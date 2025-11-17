@@ -17,5 +17,5 @@ $auth->logout();
 $page = "auth/login";
 $file = __DIR__ . "/../../views/" . $page . ".php";
 include $file;
-exit; // Detén la ejecución para no incluir más HTML
+exit; // Se detiene la ejecución para no incluir más HTML
 ?>

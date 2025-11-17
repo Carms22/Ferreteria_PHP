@@ -30,13 +30,13 @@ $auth = new Auth($conexion);
         <a href="index.php?page=order">Pedido</a>
         <a href="index.php?page=auth/logout">Cerrar sesión</a>
         <h4><?php if(isset($_SESSION['user_email'])){
-                $_SESSION['user_email'];
+                echo $_SESSION['user_email'];
             } ?>
 
         </h4>
     </nav>
-    <div class="content">
-        
+
+    <div class="content"> 
         <?php
         if (isset($_GET['page'])) {
             // construimos ruta segura
