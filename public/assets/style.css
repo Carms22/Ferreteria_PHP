@@ -41,4 +41,7 @@ form.column {
     margin-top: 5px;
     margin-bottom: 10px;
 }
+td, th{
+    padding: 10px;
+}
 
