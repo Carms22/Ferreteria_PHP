@@ -4,9 +4,6 @@ require_once __DIR__ . "/../../src/Core/Auth.php";
 
 use Core\Database;
 use Core\Auth;
-if (session_status() !== PHP_SESSION_ACTIVE) {
-    session_start();
-}
 
 // Obtén la conexión directamente
 $pdo = Database::connect();

@@ -1,9 +1,9 @@
 <?php
 /**
- * Clase Categoria
+ * Clase Category
  * Representa una categoría de productos en la ferretería.
  */
-class Categoria{
+class Category{
     /**
      * Código único de la categoría
      * @var int
