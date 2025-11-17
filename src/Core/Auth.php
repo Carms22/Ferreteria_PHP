@@ -21,16 +21,16 @@ class Auth{
      * @return bool
      */
     public function login(string $email, string $pass): bool {
-
         $sql ="SELECT * FROM ferreterias WHERE Correo = :email";
         $stmt = $this->pdo->prepare($sql);//evita inyecciones sql
         $stmt->execute(['email' => $email]);
         $user = $stmt->fetch();
-        
-        if ($user && password_verify($pass, $user['Clave'])) {
+        //var_dump($user);
+        if ($user && $pass==$user['Clave']) {
             $_SESSION['user_id']   = $user['CodRes'];
             $_SESSION['user_name'] = $user['Nombre'];
             $_SESSION['user_email'] = $user['Correo'];
+            var_dump($_SESSION['user_email']);
             return true;
         }
         return false;

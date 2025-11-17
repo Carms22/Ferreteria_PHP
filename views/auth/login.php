@@ -4,7 +4,9 @@ require_once __DIR__ . "/../../src/Core/Auth.php";
 
 use Core\Database;
 use Core\Auth;
-
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
 
 // Obtén la conexión directamente
 $pdo = Database::connect();
@@ -16,8 +18,9 @@ $auth = new Auth($pdo);
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST['email'] ?? '';
     $pass  = $_POST['pass'] ?? '';
-    
+    //var_dump($email);//me salen los valores correctos, se pasa por post
     if ($auth->login($email, $pass)) {
+        var_dump($pass);
         header("Location: ../../public/index.php?page=catalog/landing");
         exit;
     } else {

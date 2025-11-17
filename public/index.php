@@ -1,5 +1,8 @@
 <?php
-session_start();
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+
 
 include_once __DIR__ . "/../views/header.php";
 include_once __DIR__ . "/../src/Core/Database.php";
@@ -27,8 +30,8 @@ $auth = new Auth($conexion);
         <?php
         if (isset($_GET['page'])) {
             // construimos ruta segura
-            $page = basename($_GET['page']); // Seguridad: evita rutas maliciosas
-            $file = __DIR__ . "/../views/". $page .".php";
+            $page = str_replace(['..', '\\'], '', $_GET['page']); // Limpieza básica
+            $file = __DIR__ . "/../views/" . $page . ".php";
             /**
              * __DIR__ → /var/www/html/T1_Practica2_Ferreteria/public
              * "/../views/" → sube un nivel (..) y entra en views/
