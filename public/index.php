@@ -13,12 +13,7 @@ use Core\Auth;
 $conexion = Database::connect();
 $auth = new Auth($conexion);
 
-
-
-// Incluye el header solo si no es logout
-include_once __DIR__ . "/../views/header.php";
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -29,12 +24,30 @@ include_once __DIR__ . "/../views/header.php";
     <title>Ferretería</title>
 </head>
 <body>
+    <nav class="row">
+        <a href="index.php?page=maintenance">Mantenimiento</a>
+        <a href="index.php?page=catalog/landing">Suministros</a>
+        <a href="index.php?page=order">Pedido</a>
+        <a href="index.php?page=auth/logout">Cerrar sesión</a>
+        <h4><?php if(isset($_SESSION['user_email'])){
+                $_SESSION['user_email'];
+            } ?>
+
+        </h4>
+    </nav>
     <div class="content">
+        
         <?php
         if (isset($_GET['page'])) {
             // construimos ruta segura
             $page = str_replace(['..', '\\'], '', $_GET['page']); // Limpieza básica
             $file = __DIR__ . "/../views/" . $page . ".php";
+            if (!$auth->isAuthenticated()) {
+                $page = "auth/login";
+                $file = __DIR__ . "/../views/". $page .".php";
+                include $file;
+                exit;
+            }
             /**
              * __DIR__ → /var/www/html/T1_Practica2_Ferreteria/public
              * "/../views/" → sube un nivel (..) y entra en views/
