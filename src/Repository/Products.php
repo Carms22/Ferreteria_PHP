@@ -43,12 +43,11 @@ class Products{
             echo "<table>
                 <thead>
                     <tr>
-                        <th>CodCad</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Peso</th>
                         <th>Stock</th>
-                        <th>Categoría</th>
+                        <th>Comprar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,12 +55,17 @@ class Products{
             
             foreach ($productos as $product) {
                 echo "<tr>
-                    <td>{$product->getCodProd()}</td>
                     <td>{$product->getNombre()}</td>
                     <td>{$product->getDescripcion()}</td>
                     <td>{$product->getPeso()}</td>
                     <td>{$product->getStock()}</td>
-                    <td>{$nombreCat}</td>
+                    <td>
+                    <form method='post' action='index.php?page=order'>
+                        <input type='number' name='unidades' id='unidades'>
+                        <input type='hidden' name='producto' value='{$product->getNombre()}'>
+                        <button type='submit' value='comprar'> Comprar</button>
+                    </form>
+                    </td>
                 </tr>";
             }
 

@@ -14,8 +14,4 @@ if( $products ){
 }else{
     echo "No hay productos cargados";
 }
-
 ?>
-
-
-<h2>Suministros</h2>
