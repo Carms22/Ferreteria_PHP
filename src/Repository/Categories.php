@@ -23,21 +23,6 @@ class Categories{
             }
         }
     }
-    //añadir categoría
-    public function addCategory(Category $category): bool {
-        $cod=$category->getcodCat();
-        $nombre=$category->getNombre();
-        $descripcion=$category->getDescripcion();
-        // 3. Insertar nuevo marcador
-        $stmt = $this->pdo->prepare("INSERT INTO categorias VALUES (:CodCad, :Nombre,:Descripcion)");
-        $stmt->bindValue(':CodCad', $cod);
-        $stmt->bindValue(':Nombre', $nombre);
-        $stmt->bindValue(':Descripcion', $descripcion);
-        $stmt->execute();
-
-        return true;
-    }
-
         
     /**
      * Lista de forma ordenada las puntuaciones
@@ -93,40 +78,5 @@ class Categories{
             return [];
         }
     }
-
-    /**
-     * Elimina un marcador de la base de datos según nick y puntuación
-     *
-     * @param string $postNick Nick del jugador
-     * @param int $postPto Puntuación del jugador
-     * @return int Número de filas eliminadas
-     */
-    /*
-    public function deleteMarcador(string $postNick, int $postPto): int {
-        $sql = "DELETE FROM topten WHERE nick = :nick AND score = :score LIMIT 1";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(':nick', $postNick);
-        $stmt->bindParam(':score', $postPto);
-        $stmt->execute();
-        return $stmt->rowCount(); // devuelve cuántas filas se eliminaron
-    }
-        */
-    /**
-     * Actualizar un marcador de la base de datos según nick y puntuación
-     *
-     * @param string $postNick Nick del jugador
-     * @param int $postPto Puntuación del jugador
-     * @return int Número de filas actualizadas
-     */
-    /*
-    public function updateMarcador(string $postNick, int $postPto): int {
-        $sql = "UPDATE topten SET score = :score WHERE nick = :nick LIMIT 1";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(':nick', $postNick);
-        $stmt->bindParam(':score', $postPto);
-        $stmt->execute();
-        return $stmt->rowCount(); // devuelve cuántas filas se actualizaron
-    }
-        */
 
 }

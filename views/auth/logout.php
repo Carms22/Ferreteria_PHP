@@ -11,8 +11,13 @@ $pdo = Database::connect();
 // Crea el objeto Auth con la conexión
 $auth = new Auth($pdo);
 $auth->logout();
-$page = "auth/login";
-$file = __DIR__ . "/../../views/" . $page . ".php";
-include $file;
-exit; // Se detiene la ejecución para no incluir más HTML
+//Enlace a login::
+echo "<div class'column'>";
+echo "<h2>Te has desconectado</h2>";
+echo "<h3><a href='index.php?page=auth/login' >Ir a Login </a></h3>";
+echo "</div>";
+//$page = "auth/login";
+////$file = __DIR__ . "/../../views/" . $page . ".php";
+//include $file;
+//exit; // Se detiene la ejecución para no incluir más HTML
 ?>
