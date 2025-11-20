@@ -1,4 +1,4 @@
-
+```text
 T1_Practica2_Ferreteria/
 ├─ public/
 │ ├─ index.php 
@@ -43,3 +43,4 @@ T1_Practica2_Ferreteria/
 │ ├─ documentacion-tecnica.pdf # Entrega Anexo IV
 ├─ composer.json # (Opcional) PSR-4 autoload
 ├─ README.md # Instrucciones resumidas de despliegue
+```
