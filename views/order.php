@@ -1,6 +1,6 @@
 <?php
 echo "<div class='column'>";
-
+//Si hay envío de formulario:
 if (isset($_POST['unidades']) && (int)$_POST['unidades'] > 0 && isset($_POST['idProducto']) && isset($_POST['producto'])) {
     // Si no existe la sesión, inicialízala como array vacío
     if (!isset($_SESSION['lineaProducto'])) {
@@ -69,5 +69,13 @@ if (isset($_SESSION['lineaProducto']) && count($_SESSION['lineaProducto']) > 0) 
 } else {
     echo "No hay productos seleccionados";
 }
+if( isset($_SESSION['lineaProducto'])){
+    echo "<form action='index.php?page=confirm' method='post'>
+        <button type='submit'>Hacer pedido</button>
+    </form>";
 
+}
 echo "</div>";
+
+
+?>
