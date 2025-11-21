@@ -1,3 +1,6 @@
+
+
+
 ```text
 T1_Practica2_Ferreteria/
 ├─ public/
@@ -7,40 +10,33 @@ T1_Practica2_Ferreteria/
 │ ├─ Core/
 │ │ ├─ Database.php # Conexión PDO
 │ │ ├─ Auth.php 
-│ ├─ Domain/
-│ │ ├─ Entity/
-│ │ │ ├─ Categoria.php
-│ │ │ ├─ Producto.php
-│ │ │ ├─ Pedido.php
-│ │ │ ├─ LineaPedido.php
-│ │ │ ├─ Usuario.php # Cuenta por ferretería (Anexo I)
-│ │ ├─ Service/
-│ │ │ ├─ CarritoService.php # Pedido provisional en sesión
-│ │ │ ├─ PedidoService.php # Validación/envío
+│ ├─ Entity/
+│ │ ├─ Categoria.php
+│ │ ├─ Product.php
+│ │ ├─ Order.php
+│ │ ├─ Orderline.php
+│ │ ├─ User.php # Cuenta por ferretería (Anexo I)
 │ ├─ Repository/
-│ │ ├─ CategoriaRepository.php
-│ │ ├─ ProductoRepository.php
-│ │ ├─ PedidoRepository.php
-│ │ ├─ LineaPedidoRepository.php
-│ │ ├─ UsuarioRepository.php
+│ │ ├─ Categories.php
+│ │ ├─ Orderlines.php
+│ │ ├─ Orders.php
+│ │ ├─ Products.php
+│ │ ├─ Users.php
+│ ├─ vendor/
 ├─ views/
-│ ├─ layout/
-│ │ ├─ header.php 
 │ ├─ auth/
 │ │ ├─ login.php
 │ │ ├─ logout.php
-│ ├─ catalogo/landing.php
-│ ├─ catalogo/products.php
+│ ├─ catalog/
+│ | ├─ landing.php
+│ | ├─ products.php
+│ | ├─ suministros.php
+│ ├─ confirm.php
 │ ├─ orders.php
-│ ├─ pedido/confirm.php
-│ ├─ pedido/summary.php
+│ ├─ noDisponible.php
+│ ├─ summary.php
 │ ├─ maintenaces.php
-├─ config/
-│ ├─ app.example.env # Variables de entorno (DSN, usuario, pass)
-├─ database/
-│ ├─ pedidos_v5.sql # Script facilitado
-├─ docs/
-│ ├─ documentacion-tecnica.pdf # Entrega Anexo IV
 ├─ composer.json # (Opcional) PSR-4 autoload
+├─ .env
 ├─ README.md # Instrucciones resumidas de despliegue
 ```

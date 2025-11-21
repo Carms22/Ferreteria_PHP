@@ -61,7 +61,7 @@ class Products{
                     <td>{$product->getStock()}</td>
                     <td>
                     <form method='post' action='index.php?page=order'>
-                        <input type='number' name='unidades' id='unidades'>
+                        <input type='number' name='unidades' id='unidades' min='1' max='{$product->getStock()}' required>
                         <input type='hidden' name='producto' value='{$product->getNombre()}'>
                         <input type='hidden' name='idProducto' value='{$product->getCodProd()}'>
                         <button type='submit' value='comprar'> Comprar</button>
