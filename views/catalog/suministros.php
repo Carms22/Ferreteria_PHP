@@ -9,6 +9,7 @@ use Core\Database;
 $conexion = Database::connect();
 
 $products = new Products($conexion);
+
 if( $products ){
     $products->listData();
 }else{

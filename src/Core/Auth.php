@@ -30,7 +30,6 @@ class Auth{
             $_SESSION['user_id']   = $user['CodRes'];
             $_SESSION['user_name'] = $user['Nombre'];
             $_SESSION['user_email'] = $user['Correo'];
-            var_dump($_SESSION['user_email']);
             return true;
         }
         return false;

@@ -1,16 +1,8 @@
 <?php
 require_once __DIR__."/../Entity/Category.php";
 class Categories{
-    /**
-     * @var PDO|null Instancia de conexión PDO (puede ser null si no está conectada)
-     */
     private PDO $pdo;
 
-    /**
-     * Constructor clase Categories
-     * 
-     * @param PDO Instancia de conexión PDO
-     */
     public function __construct(PDO $pdo) {
         $this->pdo = $pdo;
     }
@@ -23,12 +15,7 @@ class Categories{
             }
         }
     }
-        
-    /**
-     * Lista de forma ordenada las puntuaciones
-     * 
-     * @return void
-     */
+
     public function listData(){
         $categories = $this->getData();
         echo "<table>
@@ -55,12 +42,7 @@ class Categories{
         
         echo "</tbody></table>";
     }
-    
-    /**
-     * Conseguir los datos de la BD y convertirla en objetosCategoría
-     * 
-     * @return array
-     */
+
     public function getData(): array {
         $ssql = 'SELECT * FROM categorias;';
         try {

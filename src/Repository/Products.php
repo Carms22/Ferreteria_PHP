@@ -2,16 +2,8 @@
 require_once __DIR__."/../Entity/Product.php";
 require_once __DIR__."/../Entity/Category.php";
 class Products{
-    /**
-     * @var PDO|null Instancia de conexión PDO (puede ser null si no está conectada)
-     */
     private PDO $pdo;
 
-    /**
-     * Constructor clase Products
-     * 
-     * @param PDO Instancia de conexión PDO
-     */
     public function __construct(PDO $pdo) {
         $this->pdo = $pdo;
     }
@@ -54,20 +46,42 @@ class Products{
             ";
             
             foreach ($productos as $product) {
+                $stockDisponible = $product->getStock();
+                $unidadesEnCarrito = 0;
+
+                // Comprobar si el producto ya está en el carrito
+                if (isset($_SESSION['lineaProducto'])) {
+                    foreach ($_SESSION['lineaProducto'] as $linea) {
+                        if ($linea['id'] == $product->getCodProd()) {
+                            $unidadesEnCarrito = $linea['und'];
+                            break;
+                        }
+                    }
+                }
+
+                // Calcular stock restante
+                $stockRestante = $stockDisponible - $unidadesEnCarrito;
+                
                 echo "<tr>
                     <td>{$product->getNombre()}</td>
                     <td>{$product->getDescripcion()}</td>
                     <td>{$product->getPeso()}</td>
                     <td>{$product->getStock()}</td>
-                    <td>
-                    <form method='post' action='index.php?page=order'>
-                        <input type='number' name='unidades' id='unidades' min='1' max='{$product->getStock()}' required>
+                    <td>";
+                if ($stockRestante > 0) {
+                echo "<form method='post' action='index.php?page=order'>
+                        <input type='number' name='unidades' id='unidades' min='1' max='{$stockRestante}' required>
                         <input type='hidden' name='producto' value='{$product->getNombre()}'>
                         <input type='hidden' name='idProducto' value='{$product->getCodProd()}'>
                         <button type='submit' value='comprar'> Comprar</button>
                     </form>
                     </td>
                 </tr>";
+                
+                } else {
+                    echo "<span style='color:red;'>Sin stock disponible</span>";
+                }
+
             }
 
             echo "</tbody></table>";
