@@ -34,13 +34,9 @@ class OrderLines {
                 INNER JOIN categorias c ON prod.Categoria = c.CodCat
                 INNER JOIN pedidos p ON pp.Pedido = p.CodPed
                 WHERE p.CodPed = :CodPedido";
-        $stmt=$this->pdo->query($sql);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($row) {
-            return $row;
-        }
-        return null;
-
-
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':CodPedido', $CodPedido, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

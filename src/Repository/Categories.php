@@ -18,29 +18,31 @@ class Categories{
 
     public function listData(){
         $categories = $this->getData();
-        echo "<table>
+        echo "<div class='column'>";
+        echo "<h2>Suministros disponibles por categoría</h2>";
+        /*echo "<table>
                 <thead>
                     <tr>
-                        <th>CodCad</th>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
+                        <!--<th>CodCad</th>-->
+                        <!--<th>Nombre</th>-->
+                        <!--<th>Descripción</th>-->
                     </tr>
                 </thead>
                 <tbody>
             ";
-
+        */
             foreach ($categories as $category) {
                 echo "<form method='post' action=''>";
                 echo "<tr>";
-                    echo "<td>" . $category->getCodCat() . "</td>";
+                    //echo "<td>" . $category->getCodCat() . "</td>";
                     echo "<td>" . $category->getNombre() . "</td>";
-                    echo "<td>" . $category->getDescripcion() . "</td>";
+                    //echo "<td>" . $category->getDescripcion() . "</td>";
                 echo "</tr>";
                 echo "</form>";
 
             }
         
-        echo "</tbody></table>";
+        echo "</tbody></table></div>";
     }
 
     public function getData(): array {

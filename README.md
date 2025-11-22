@@ -1,42 +1,42 @@
 
 
-
 ```text
 T1_Practica2_Ferreteria/
+├─ database/
+│ ├─ pedidos_v5.sql
 ├─ public/
 │ ├─ index.php 
-│ ├─ assets/ # CSS/JS
+│ ├─ assets/
+│ │ ├─ style.css
 ├─ src/
 │ ├─ Core/
 │ │ ├─ Database.php # Conexión PDO
 │ │ ├─ Auth.php 
 │ ├─ Entity/
-│ │ ├─ Categoria.php
+│ │ ├─ Category.php
 │ │ ├─ Product.php
 │ │ ├─ Order.php
 │ │ ├─ Orderline.php
-│ │ ├─ User.php # Cuenta por ferretería (Anexo I)
+│ │ ├─ User.php # Cuenta por ferretería
 │ ├─ Repository/
 │ │ ├─ Categories.php
 │ │ ├─ Orderlines.php
 │ │ ├─ Orders.php
 │ │ ├─ Products.php
-│ │ ├─ Users.php
-│ ├─ vendor/
+├─ vendor/
 ├─ views/
 │ ├─ auth/
 │ │ ├─ login.php
 │ │ ├─ logout.php
 │ ├─ catalog/
 │ | ├─ landing.php
-│ | ├─ products.php
 │ | ├─ suministros.php
 │ ├─ confirm.php
-│ ├─ orders.php
+│ ├─ order.php
 │ ├─ noDisponible.php
-│ ├─ summary.php
 │ ├─ maintenaces.php
-├─ composer.json # (Opcional) PSR-4 autoload
+├─ composer.json
+├─ composer.lock
 ├─ .env
-├─ README.md # Instrucciones resumidas de despliegue
+├─ README.md
 ```

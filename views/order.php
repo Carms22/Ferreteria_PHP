@@ -51,7 +51,7 @@ if (isset($_POST['und_eliminar']) && isset($_POST['index'])) {
 // Mostrar productos
 if (isset($_SESSION['lineaProducto']) && count($_SESSION['lineaProducto']) > 0) {
     echo "<h3>Productos en tu pedido:</h3>";
-    echo "<table border='1'>";
+    echo "<table>";
     echo "<tr><th>ID</th><th>Nombre</th><th>Unidades</th><th>Eliminar</th></tr>";
 
     foreach ($_SESSION['lineaProducto'] as $index => $producto) {

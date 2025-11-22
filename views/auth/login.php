@@ -7,10 +7,8 @@ use Core\Auth;
 
 // Obtén la conexión directamente
 $pdo = Database::connect();
-
 // Crea el objeto Auth con la conexión
 $auth = new Auth($pdo);
-
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST['email'] ?? '';
