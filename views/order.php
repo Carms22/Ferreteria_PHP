@@ -1,14 +1,18 @@
 <?php
 echo "<div class='column'>";
-//Si hay envío de formulario:
-if (isset($_POST['unidades']) && (int)$_POST['unidades'] > 0 && isset($_POST['idProducto']) && isset($_POST['producto'])) {
+
+/*
+*Si hay envío de formulario:
+*/
+if (isset($_POST['unidades']) && (int)$_POST['unidades'] > 0 && isset($_POST['idProducto']) 
+    && isset($_POST['producto'])) {
     // Si no existe la sesión, inicialízala como array vacío
     if (!isset($_SESSION['lineaProducto'])) {
         $_SESSION['lineaProducto'] = [];
     }
 
-    $productoExiste = false;
-    // Recorremos por referencia para poder modificar el array original
+    $productoExiste = false;//para no repetir el mismo producto y añadir und al existente
+    // Recorremos por referencia (&$) para poder modificar el array original
     foreach($_SESSION['lineaProducto'] as &$linea){
         if($linea['id'] == $_POST['idProducto']){
             $linea['und'] += (int)$_POST['unidades'];
@@ -69,6 +73,8 @@ if (isset($_SESSION['lineaProducto']) && count($_SESSION['lineaProducto']) > 0) 
 } else {
     echo "No hay productos seleccionados";
 }
+
+//si Hay línea Producto para hacer pedido se muestra formulario:
 if( isset($_SESSION['lineaProducto'])){
     echo "<form action='index.php?page=confirm' method='post'>
         <button type='submit'>Hacer pedido</button>

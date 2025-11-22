@@ -26,7 +26,7 @@ class Products{
         }
 
         echo "<div class'column'>";
-        
+        //porductos agrupados por categoría:
         foreach ($productosPorCategoria as $idCat => $productos) {
             
             $nombreCat = $categoriesMap[$idCat] ?? 'Sin categoría';
@@ -46,10 +46,10 @@ class Products{
             ";
             
             foreach ($productos as $product) {
-                $stockDisponible = $product->getStock();
+                $stockDisponible = $product->getStock();//control de stock
                 $unidadesEnCarrito = 0;
 
-                // Comprobar si el producto ya está en el carrito
+                // Comprobar si el producto ya está en el carrito y coger unidadesEnCarrito
                 if (isset($_SESSION['lineaProducto'])) {
                     foreach ($_SESSION['lineaProducto'] as $linea) {
                         if ($linea['id'] == $product->getCodProd()) {
@@ -81,22 +81,15 @@ class Products{
                 } else {
                     echo "<span style='color:red;'>Sin stock disponible</span>";
                 }
-
             }
-
             echo "</tbody></table>";
-
         }
         echo "<div>";
-        
-
     }
 
 
     /**
-     * Conseguir los datos de la BD y convertirla en objetosCategoría
-     * 
-     * @return array
+     * Conseguir los datos de la BD y convertirla en objetosProducto
      */
     public function getData(): array {
         $ssql = 'SELECT * FROM productos;';
@@ -116,6 +109,9 @@ class Products{
         }
     }
 
+    /**
+     * Conseguir los datos de la BD y convertirla en objetosCategoria para agrupar por categorías en getData de productos
+     */
     public function getCategories(): array {
         $ssql = 'SELECT * FROM categorias;';
         try {

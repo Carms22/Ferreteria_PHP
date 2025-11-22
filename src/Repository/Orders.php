@@ -12,17 +12,20 @@ class Orders {
     public function createOrder(int $ferreteria): int {
         $fecha = date('Y-m-d H:i:s');
         $enviado = 0;
-
-        $stmt = $this->pdo->prepare("INSERT INTO pedidos (Fecha, Enviado, ferreteria) VALUES (?, ?, ?)");
-        $stmt->execute([$fecha, $enviado, $ferreteria]);
+        $sql="INSERT INTO pedidos (Fecha, Enviado, ferreteria) VALUES (?, ?, ?)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(1,$fecha);
+        $stmt->bindParam(2,$enviado);
+        $stmt->bindParam(3,$ferreteria);
+        $stmt->execute();
 
         return (int)$this->pdo->lastInsertId();
     }
 
     //Obtiene un pedido por su ID.
     public function getOrderById(int $codPed): ?Order {
-        $stmt = $this->pdo->prepare("SELECT * FROM pedidos WHERE CodPed = ?");
-        $stmt->execute([$codPed]);
+        $sql="SELECT * FROM pedidos WHERE CodPed = $codPed";
+        $stmt = $this->pdo->query($sql);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($row) {

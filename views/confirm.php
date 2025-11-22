@@ -1,8 +1,10 @@
 <?php
-session_start();
 require_once __DIR__."/../src/Repository/Orders.php";
 require_once __DIR__."/../src/Repository/OrderLines.php";
 include_once __DIR__ . "/../src/Core/Database.php";
+
+use Core\Database;
+$pdo=DataBase::connect();
 
 $ordersRepo = new Orders($pdo);
 $orderLinesRepo = new OrderLines($pdo);
@@ -25,8 +27,9 @@ if (!empty($_SESSION['lineaProducto']) && isset($_SESSION['user_id'])) {
 
         // Vaciar carrito
         $_SESSION['lineaProducto'] = [];
-
+        //getPedidolineas
         echo "<p style='color:green;'>Pedido confirmado correctamente.</p>";
+
     } catch (Exception $e) {
         $pdo->rollBack();
         echo "<p style='color:red;'>Error al confirmar el pedido: " . $e->getMessage() . "</p>";
@@ -34,3 +37,5 @@ if (!empty($_SESSION['lineaProducto']) && isset($_SESSION['user_id'])) {
 } else {
     echo "<p>No hay productos en el carrito.</p>";
 }
+
+?>
